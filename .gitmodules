@@ -1,0 +1,3 @@
+[submodule "iotivity-lite"]
+	path = iotivity-lite
+	url = https://gitlab.iotivity.org/iotivity/iotivity-lite.git

@@ -6,32 +6,32 @@ all: simpleserver simpleclient obt
 .PHONY: base
 base: base/Dockerfile
 	cd base && \
-	docker build -t ocf/base .
+	docker build -t iotivity/base .
 
 .PHONY: simpleserver
 simpleserver: base simpleserver/Dockerfile
 	cd iotivity-lite/port/linux && \
 	DEBUG=$(DEBUG) make simpleserver
-	docker build -t ocf/simpleserver -f simpleserver/Dockerfile .
+	docker build -t iotivity/simpleserver -f simpleserver/Dockerfile .
 
 .PHONY: simpleserver
 simpleclient: base simpleclient/Dockerfile
 	cd iotivity-lite/port/linux && \
 	DEBUG=$(DEBUG) make simpleclient
-	docker build -t ocf/simpleclient -f simpleclient/Dockerfile .
+	docker build -t iotivity/simpleclient -f simpleclient/Dockerfile .
 
 .PHONY: obt
 obt: base obt/Dockerfile
 	cd iotivity-lite/port/linux && \
 	DEBUG=$(DEBUG) make onboarding_tool
-	docker build -t ocf/obt -f obt/Dockerfile .
+	docker build -t iotivity/obt -f obt/Dockerfile .
 
 .PHONY: clean
 clean:
 	cd iotivity-lite/port/linux && \
 	make cleanall
-	docker rmi -f ocf/base
+	docker rmi -f iotivity/base
 
 .PHONY: clean
 cleanall: clean
-	docker image rmi -f ocf/obt ocf/simpleserver ocf/simpleclient
+	docker image rmi -f iotivity/obt iotivity/simpleserver iotivity/simpleclient

@@ -1,4 +1,7 @@
-DEBUG=1
+# DEBUG=1
+
+.PHONY: all
+all: simpleserver simpleclient obt
 
 .PHONY: base
 base: base/Dockerfile

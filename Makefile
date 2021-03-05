@@ -1,37 +1,16 @@
-# DEBUG=1
+IMAGE=iotivity/examples
 
-.PHONY: all
-all: simpleserver simpleclient obt
+.PHONY: all examples clean cleanall
+all: examples
 
-.PHONY: base
-base: base/Dockerfile
-	cd base && \
-	docker build -t iotivity/base .
-
-.PHONY: simpleserver
-simpleserver: base simpleserver/Dockerfile
+examples: examples/Dockerfile
 	cd iotivity-lite/port/linux && \
-	DEBUG=$(DEBUG) make simpleserver
-	docker build -t iotivity/simpleserver -f simpleserver/Dockerfile .
+	DEBUG=$(DEBUG) make simpleserver simpleclient onboarding_tool
+	docker build -t $(IMAGE) -f $< .
 
-.PHONY: simpleserver
-simpleclient: base simpleclient/Dockerfile
-	cd iotivity-lite/port/linux && \
-	DEBUG=$(DEBUG) make simpleclient
-	docker build -t iotivity/simpleclient -f simpleclient/Dockerfile .
-
-.PHONY: obt
-obt: base obt/Dockerfile
-	cd iotivity-lite/port/linux && \
-	DEBUG=$(DEBUG) make onboarding_tool
-	docker build -t iotivity/obt -f obt/Dockerfile .
-
-.PHONY: clean
 clean:
 	cd iotivity-lite/port/linux && \
 	make cleanall
-	docker rmi -f iotivity/base
 
-.PHONY: clean
 cleanall: clean
-	docker image rmi -f iotivity/obt iotivity/simpleserver iotivity/simpleclient
+	docker image rmi -f $(IMAGE)

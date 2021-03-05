@@ -89,3 +89,21 @@ rm <container>`), the credentials no longer persist.
 For the credentials to persist across different instances, the use of a
 [volume](https://docs.docker.com/storage/volumes/) may be appropriate. To do so,
 you may specify the `--mount` flag when executing the containerized examples.
+
+## Using `docker-compose`
+
+If you have `docker-compose` installed, you can also use it to quickly bootstrap
+the example application containers with a simple `docker-compose up -d`.
+**Note** that this creates a network with IPv6 specified, but that IPv6 is not
+officially supported in v3 compose files (this seems to be working, however).
+
+Once the containers are up, it is helpful to use `docker-compose logs -f
+simpleclient simpleserver` in one terminal and `docker attach obt` in another to
+perform onboarding and observe results. However, because `simpleclient` tries to
+discover `simpleserver` immediately when it runs, it is helpful to restart these
+containers individually after provisioning, i.e.
+
+```
+$ docker restart simpleserver
+$ docker restart simpleclient
+```

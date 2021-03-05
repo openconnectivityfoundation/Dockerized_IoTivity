@@ -5,7 +5,7 @@ all: examples
 
 examples: examples/Dockerfile
 	cd iotivity-lite/port/linux && \
-	DEBUG=$(DEBUG) make simpleserver simpleclient onboarding_tool
+	make simpleserver simpleclient onboarding_tool
 	docker build -t $(IMAGE) -f $< .
 
 clean:

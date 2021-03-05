@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  obt:
+    container_name: obt
+    image: iotivity/examples
+    tty: true
+    stdin_open: true
+    entrypoint: /iotivity-apps/onboarding_tool
+    networks:
+      - ocfnet
+
+  simpleserver:
+    container_name: simpleserver
+    image: iotivity/examples
+    tty: true
+    stdin_open: true
+    entrypoint: /iotivity-apps/simpleserver
+    networks:
+      - ocfnet
+
+  simpleclient:
+    container_name: simpleclient
+    image: iotivity/examples
+    tty: true
+    stdin_open: true
+    entrypoint: /iotivity-apps/simpleclient
+    networks:
+      - ocfnet
+
+# Note that IPv6 is not officially supported in compose file v3....
+networks:
+  ocfnet:
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.2.0/24
+          gateway: 172.16.2.1
+        - subnet: 2001:db8:2::/64
+          gateway: 2001:db8:2::1

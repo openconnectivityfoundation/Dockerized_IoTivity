@@ -3,7 +3,7 @@ version: '3.8'
 services:
   obt:
     container_name: obt
-    image: iotivity/examples
+    image: ocfadmin/iotivity-examples
     tty: true
     stdin_open: true
     entrypoint: /iotivity-apps/onboarding_tool
@@ -12,7 +12,7 @@ services:
 
   simpleserver:
     container_name: simpleserver
-    image: iotivity/examples
+    image: ocfadmin/iotivity-examples
     tty: true
     stdin_open: true
     entrypoint: /iotivity-apps/simpleserver
@@ -21,7 +21,7 @@ services:
 
   simpleclient:
     container_name: simpleclient
-    image: iotivity/examples
+    image: ocfadmin/iotivity-examples
     tty: true
     stdin_open: true
     entrypoint: /iotivity-apps/simpleclient

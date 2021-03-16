@@ -106,9 +106,9 @@ To get a basic demo, the following commands could be used:
 
 ```
 # Run in separate terminals...
-$ docker run -it --name obt --entrypoint /iotivity-apps/onboarding_tool iotivity/examples
-$ docker run -it --name simpleserver --entrypoint /iotivity-apps/simpleserver iotivity/examples
-$ docker run -it --name simpleclient --entrypoint /iotivity-apps/simpleclient iotivity/examples
+$ docker run -it --name obt --entrypoint /iotivity-apps/onboarding_tool ocfadmin/iotivity-examples
+$ docker run -it --name simpleserver --entrypoint /iotivity-apps/simpleserver ocfadmin/iotivity-examples
+$ docker run -it --name simpleclient --entrypoint /iotivity-apps/simpleclient ocfadmin/iotivity-examples
 ```
 
 If an instance needs to be restarted (e.g., after onboarding and provisioning

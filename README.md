@@ -5,6 +5,19 @@ demo.*
 
 *Author: Andy Dolan (CableLabs)*
 
+## Contents
+
+* [Overview](#overview)
+* [Dependencies](#dependencies)
+  * [IoTivity-Lite Environment](#environment-and-iotivitylite-build)
+  * [Docker](#docker)
+  * [IPv6 Support](#ipv6-support)
+* [Building the Image](#building-the-image)
+  * [Image Structure](#image-structure)
+* [Using the Image](#using-the-image)
+  * [Use of Volumes](#use-of-volumes)
+* [Using Docker-Compose](#using-dockercompose)
+
 ## Overview
 
 This repository contains the definitions necessary to build a container image
@@ -28,10 +41,14 @@ Debian-based systems.
 
 ### Docker
 
-Docker is assumed to be installed. Additionally, the use of IPv6 is assumed in
-the default build, and IPv6 support must be enabled for IoTivity example
-container instances to communicate with each other. [This guide](https://docs.docker.com/config/daemon/ipv6/)
-details how to enable IPv6 support in the Docker daemon. **Note** that IPv6
+Docker is assumed to be installed as the container image build tool.
+
+### IPv6 Support
+
+Additionally, the use of IPv6 is assumed in the default build, and IPv6 support
+must be enabled for IoTivity example container instances to communicate with
+each other. [This guide](https://docs.docker.com/config/daemon/ipv6/) details
+how to enable IPv6 support in the Docker daemon. **Note** that Docker IPv6
 support is only available for Linux hosts.
 
 Alternatively, you may specify `IPV4=1` when building to enable IPv4 support in
@@ -41,6 +58,17 @@ the IoTivity build (see below).
 
 The [`Makefile`](./Makefile) is configured to first compile the IoTivity-Lite
 binaries, then build the image based on the [`Dockerfile`](./examples/Dockerfile).
+
+Note that different features in IoTivity-Lite can be enabled or disabled with
+[variables](https://iotivity.org/documentation/building-iotivity-linux)
+specified during the build process. These variables can be set during the build
+of the container images defined here. For example, to include IPv4 support in
+the image, one could use the following `make` command:
+
+```
+$ make cleanall
+$ IPV4=1 make
+```
 
 ### Image Structure
 

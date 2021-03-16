@@ -9,14 +9,14 @@ demo.*
 
 * [Overview](#overview)
 * [Dependencies](#dependencies)
-  * [IoTivity-Lite Environment](#environment-and-iotivitylite-build)
+  * [IoTivity-Lite Environment](#environment-and-iotivity-lite-build)
   * [Docker](#docker)
   * [IPv6 Support](#ipv6-support)
 * [Building the Image](#building-the-image)
   * [Image Structure](#image-structure)
 * [Using the Image](#using-the-image)
   * [Use of Volumes](#use-of-volumes)
-* [Using Docker-Compose](#using-dockercompose)
+* [Using Docker-Compose](#using-docker-compose)
 
 ## Overview
 
@@ -58,6 +58,18 @@ the IoTivity build (see below).
 
 The [`Makefile`](./Makefile) is configured to first compile the IoTivity-Lite
 binaries, then build the image based on the [`Dockerfile`](./examples/Dockerfile).
+
+The default image and tag that is built is `ocfadmin/iotivity-examples:latest`.
+These defaults can be overridden by specifying the variables within the `make`
+command, as follows:
+
+```
+$ make IMAGE=demo/iotivity-examples TAG=foo
+```
+
+In this case, it is important to note that the default `cleanimage` routine will
+not account for images that do not have the default name:tag of
+`ocfadmin/iotivity-examples:latest`.
 
 Note that different features in IoTivity-Lite can be enabled or disabled with
 [variables](https://iotivity.org/documentation/building-iotivity-linux)

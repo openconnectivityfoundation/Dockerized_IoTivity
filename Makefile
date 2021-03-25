@@ -1,22 +1,17 @@
-BASE_IMAGE=iotivity-base
 EXAMPLE_IMAGE=ocfadmin/iotivity-examples
 DEVELOPMENT_IMAGE=ocfadmin/iotivity-development
 TAG=latest
 BINARIES=simpleserver simpleclient onboarding_tool
 LIBRARIES=libiotivity-lite-server.a libiotivity-lite-client.a libiotivity-lite-client-server.a
 
-.PHONY: all base examples dev clean cleanimage cleanall
+.PHONY: all examples dev clean cleanimage cleanall
 all: examples
 
-examples: examples/Dockerfile base $(BINARIES)
+examples: examples/Dockerfile $(BINARIES)
 	docker build -t $(EXAMPLE_IMAGE):$(TAG) -f $< .
 
 dev: development_environment/Dockerfile $(LIBRARIES)
 	docker build -t $(DEVELOPMENT_IMAGE):$(TAG) -f $< .
-
-base: base/Dockerfile
-	cd base && \
-	docker build -t $(BASE_IMAGE) .
 
 iotivity-lite/.git:
 	git submodule update --init $(@D)
@@ -32,7 +27,6 @@ $(LIBRARIES): iotivity-lite/.git
 clean:
 	cd iotivity-lite/port/linux && \
 	make cleanall
-	docker image rm -f $(BASE_IMAGE)
 
 cleanimage:
 	docker image rm -f $(EXAMPLE_IMAGE):$(TAG)

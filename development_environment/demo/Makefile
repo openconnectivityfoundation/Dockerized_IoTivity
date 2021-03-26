@@ -1,7 +1,7 @@
 CURDIR=$(shell pwd)
 VOLUME=speaker_server
 MAKE_TARGET=iotivity-app/speaker_server
-DEV_IMAGE=ocfadmin/iotivity-development
+DEV_IMAGE=ocfadmin/iotivity-builder
 
 .PHONY: build clean volbuild volume copysource
 

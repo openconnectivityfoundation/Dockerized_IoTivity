@@ -1,6 +1,6 @@
 IOTIVITY_VERSION=2.2.0
 EXAMPLE_IMAGE=ocfadmin/iotivity-examples
-DEVELOPMENT_IMAGE=ocfadmin/iotivity-development
+DEVELOPMENT_IMAGE=ocfadmin/iotivity-builder
 TAG=latest
 BINARIES=simpleserver simpleclient onboarding_tool
 

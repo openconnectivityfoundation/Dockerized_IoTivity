@@ -150,3 +150,21 @@ $ docker run --rm --env DEBUG=1 --env IPV4=1 -v /path/to/the/app:/iotivity-app o
 Specifying the `cleanall` target before the app target ensures that the
 libraries are rebuilt and any Lite feature variables are applied during
 compilation.
+
+### Build Environment Shell
+
+Alternatively, this image could be used for a more persistent cli application
+with which a developer could compile and manipulate different parts of the
+IoTivity codebase manually. To do so, changing the entrypoint of the image is
+necessary; for example:
+
+```bash
+$ docker run -i -t --name iot-dev --entrypoint=/bin/bash -v myapp:/iotivity-app ocfadmin/iotivity-builder
+
+# Now in resulting shell
+root@3866e36f7464:/iotivity-lite/port/linux# make -f ./iotivity-app/iotivity-app.mk iotivity-app/speaker_server
+```
+
+This method of running the image can be used for a more persistent development
+environment. Additionally, this environment should be able to run compiled
+applications.

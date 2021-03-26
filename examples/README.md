@@ -155,3 +155,7 @@ containers individually after provisioning, i.e.
 $ docker restart simpleserver
 $ docker restart simpleclient
 ```
+
+Note that the `onboarding_tool` will initially output a main menu that may not
+be visible when first running `docker attach obt`. If this occurs, simply type
+`0` and hit enter after attaching to reprint the main menu.

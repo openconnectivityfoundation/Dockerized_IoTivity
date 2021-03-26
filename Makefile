@@ -19,11 +19,11 @@ iotivity-lite/.git:
 
 $(BINARIES): iotivity-lite/.git
 	cd iotivity-lite/port/linux && \
-	make $@
+		make $@
 
 cleaniotivity:
 	cd iotivity-lite/port/linux && \
-	make cleanall
+		make cleanall
 
 cleanimage:
 	docker image rm -f $(EXAMPLE_IMAGE):$(TAG)

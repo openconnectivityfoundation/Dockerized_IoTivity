@@ -64,7 +64,7 @@ The default image and tag that is built is `ocfadmin/iotivity-examples:latest`.
 These defaults can be overridden by specifying the variables within the `make`
 command, as follows:
 
-```
+```bash
 $ make IMAGE=demo/iotivity-examples TAG=foo
 ```
 
@@ -78,7 +78,7 @@ specified during the build process. These variables can be set during the build
 of the container images defined here. For example, to include IPv4 support in
 the image, one could use the following `make` command:
 
-```
+```bash
 $ make cleanall
 $ IPV4=1 make
 ```
@@ -97,7 +97,7 @@ The final image has a file structure containing the following elements
 * `/iotivity-apps`: Contains the actual binaries for each application, as well
   as symlinks for the corresponding `*_creds` directories, IE:
 
-```
+```bash
 $ ls -ld /iotivity-apps/simpleserver_creds
 /iotivity-apps/simpleserver_creds -> /creds/simpleserver_creds
 ```
@@ -110,7 +110,7 @@ volume-based solution for the persistent storage of `/creds` is desired.
 Once built, the image can be instantiated to run any of the three applications.
 To get a basic demo, the following commands could be used:
 
-```
+```bash
 # Run in separate terminals...
 $ docker run -it --name obt --entrypoint /iotivity-apps/onboarding_tool ocfadmin/iotivity-examples
 $ docker run -it --name simpleserver --entrypoint /iotivity-apps/simpleserver ocfadmin/iotivity-examples
@@ -121,7 +121,7 @@ If an instance needs to be restarted (e.g., after onboarding and provisioning
 the client and server, the containers can be exited with ctrl-c and restarted
 with the following:
 
-```
+```bash
 $ docker start -ai <name of container>
 ```
 
@@ -151,7 +151,7 @@ perform onboarding and observe results. However, because `simpleclient` tries to
 discover `simpleserver` immediately when it runs, it is helpful to restart these
 containers individually after provisioning, i.e.
 
-```
+```bash
 $ docker restart simpleserver
 $ docker restart simpleclient
 ```

@@ -77,7 +77,7 @@ other specified with an `--env` argument (see below).
 With this structure in mind, the simplest execution of the image to build an
 application could look like the following:
 
-```
+```bash
 $ docker run --rm --env MAKEFILE=iotivity-app.mk -v /path/to/the/app:/iotivity-app ocfadmin/iotivity-builder <APP_TARGET>
 ```
 
@@ -108,7 +108,7 @@ The code below could be used to create a volume, copy source files to it,
 compile them to the output binary, and subsequently run the binary with the
 `ocfadmin/iotivity-examples` image:
 
-```
+```bash
 # Create volume
 $ docker volume create myapp
 
@@ -143,7 +143,7 @@ effect (i.e. to apply during all compilations).
 For example, one could specify the following command to enable debug output and
 IPv4 support for their build:
 
-```
+```bash
 $ docker run --rm --env DEBUG=1 --env IPV4=1 -v /path/to/the/app:/iotivity-app ocfadmin/iotivity-builder cleanall <APP_TARGET>
 ```
 

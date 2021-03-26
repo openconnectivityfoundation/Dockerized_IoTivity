@@ -41,7 +41,7 @@ To build the application with a bind mount, use `make build`.
 The Makefile is also configured to allow specifying different IoTivity-Lite
 build environment variables and/or application targets like so:
 
-```
+```bash
 $ make ENV_ARGS="DEBUG=1 IPV4=1" MAKE_TARGET="cleanall iotivity-app/speaker_server"
 ```
 
@@ -52,7 +52,7 @@ file that can be used to spin up a quick instance of `speaker_server` after
 building. This assumes the volume-based build process. A full execution of the
 demo would look like the following:
 
-```
+```bash
 # Build with builder image
 $ make
 

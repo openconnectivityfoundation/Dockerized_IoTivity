@@ -10,7 +10,7 @@ all: examples dev
 examples: examples/Dockerfile $(BINARIES)
 	docker build -t $(EXAMPLE_IMAGE):$(TAG) -f $< .
 
-dev: build_environment/Dockerfile
+dev: build_environment/Dockerfile build_environment/build.sh
 	docker build --build-arg IOTIVITY_TAG=$(IOTIVITY_VERSION) -t $(BUILD_IMAGE):$(TAG) build_environment
 
 iotivity-lite/.git:

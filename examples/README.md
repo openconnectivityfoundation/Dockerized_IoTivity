@@ -27,7 +27,7 @@ can be used together to demonstrate how a typical flow of discovery, onboarding,
 provisioning, and normal operation can be done in OCF.
 
 This project necessarily relies on [IoTivity-Lite](https://gitlab.iotivity.org/iotivity/iotivity-lite)
-and is marked as a submodule.
+and is marked as a submodule in the root directory.
 
 ## Dependencies
 
@@ -56,8 +56,9 @@ the IoTivity build (see below).
 
 ## Building the Image
 
-The [`Makefile`](./Makefile) is configured to first compile the IoTivity-Lite
-binaries, then build the image based on the [`Dockerfile`](./examples/Dockerfile).
+The [`Makefile`](/Makefile) is configured to first compile the IoTivity-Lite
+binaries, then build the image based on the [`Dockerfile`](/examples/Dockerfile)
+in this directory.
 
 The default image and tag that is built is `ocfadmin/iotivity-examples:latest`.
 These defaults can be overridden by specifying the variables within the `make`
@@ -81,6 +82,11 @@ the image, one could use the following `make` command:
 $ make cleanall
 $ IPV4=1 make
 ```
+
+The version of IoTivity lite that is used can also be specified using the
+`IOTIVITY_VERSION` variable. Changing this after initiating the IoTivity-Lite
+submodule may require a `make deinit` before rebuilding, to ensure that the
+proper version is used in builds.
 
 ### Image Structure
 
@@ -133,9 +139,11 @@ you may specify the `--mount` flag when executing the containerized examples.
 ## Using `docker-compose`
 
 If you have `docker-compose` installed, you can also use it to quickly bootstrap
-the example application containers with a simple `docker-compose up -d`.
-**Note** that this creates a network with IPv6 specified, but that IPv6 is not
-officially supported in v3 compose files (this seems to be working, however).
+the example application containers with a simple `docker-compose up -d` from the
+main directory, which uses the [`docker-compose.yml`](/docker-compose.yml)
+located there. **Note** that this creates a network with IPv6 specified, but
+that IPv6 is not officially supported in v3 compose files (this seems to be
+working, however).
 
 Once the containers are up, it is helpful to use `docker-compose logs -f
 simpleclient simpleserver` in one terminal and `docker attach obt` in another to

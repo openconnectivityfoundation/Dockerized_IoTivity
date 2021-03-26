@@ -1,6 +1,6 @@
 IOTIVITY_VERSION=2.2.0
 EXAMPLE_IMAGE=ocfadmin/iotivity-examples
-DEVELOPMENT_IMAGE=ocfadmin/iotivity-builder
+BUILD_IMAGE=ocfadmin/iotivity-builder
 TAG=latest
 BINARIES=simpleserver simpleclient onboarding_tool
 
@@ -10,8 +10,8 @@ all: examples dev
 examples: examples/Dockerfile $(BINARIES)
 	docker build -t $(EXAMPLE_IMAGE):$(TAG) -f $< .
 
-dev: development_environment/Dockerfile
-	docker build --build-arg IOTIVITY_TAG=$(IOTIVITY_VERSION) -t $(DEVELOPMENT_IMAGE):$(TAG) development_environment
+dev: build_environment/Dockerfile
+	docker build --build-arg IOTIVITY_TAG=$(IOTIVITY_VERSION) -t $(BUILD_IMAGE):$(TAG) build_environment
 
 iotivity-lite/.git:
 	git submodule update --init $(@D)
@@ -27,7 +27,7 @@ cleaniotivity:
 
 cleanimage:
 	docker image rm -f $(EXAMPLE_IMAGE):$(TAG)
-	docker image rm -f $(DEVELOPMENT_IMAGE):$(TAG)
+	docker image rm -f $(BUILD_IMAGE):$(TAG)
 	docker image prune -f
 
 cleanall: cleaniotivity cleanimage

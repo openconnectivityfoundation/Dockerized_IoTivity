@@ -9,7 +9,7 @@ applications.*
 
 * [Introduction](#introduction)
 * [Examples Overview](#iotivity-lite-examples)
-* [Development Environment Overview](#iotivity-lite-development-environment)
+* [Build Environment Overview](#iotivity-lite-build-environment)
 * [General Building](#general-building)
 
 ## Introduction
@@ -17,7 +17,7 @@ applications.*
 This repository contains definitions and scripts to build and run
 container-based solutions for IoTivity-Lite demonstrations and build processes.
 These images can be used to run [example applications](/examples) already
-contained in IoTivity-Lite, as well as [build](/development_environment)
+contained in IoTivity-Lite, as well as [build](/build_environment)
 applications from source code without cloning and configuring Lite. Published
 images are available at the `ocfadmin` organization account on [Docker Hub](https://hub.docker.com/u/ocfadmin).
 
@@ -32,15 +32,15 @@ containers to demonstrate the general use and interactions of OCF Devices.
 
 See the examples [README](/examples/README.md) for more information.
 
-## IoTivity-Lite Development Environment
+## IoTivity-Lite Build Environment
 
-The [development\_environment](/development_environment) directory contains a
+The [build\_environment](/build_environment) directory contains a
 definition of a container that can be used to compile IoTivity-Lite applications
-from source, as well as a [demonstration](/development_environment/demo) of how
+from source, as well as a [demonstration](/build_environment/demo) of how
 to do so with an example source file.
 
-See the development environment [README](/development_environment/README.md) for
-more information.
+See the build environment [README](/build_environment/README.md) for more
+information.
 
 ## General Building
 
@@ -59,5 +59,5 @@ To run a simple demo of the `iotivity-examples` image, simply use a
 `docker-compose up -d` in the main directory. See further instructions in the
 examples [README](/examples/README.md#using-docker-compose).
 
-See the development environment demo [README](/development_environment/demo/README.md)
-for an example of building IoTivity apps with the `iotivity-builder` image.
+See the build environment demo [README](/build_environment/demo/README.md) for
+an example of building IoTivity apps with the `iotivity-builder` image.

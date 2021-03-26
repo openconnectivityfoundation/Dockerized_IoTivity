@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # OBT for discovery and provisioning
   obt:
     container_name: obt
     image: ocfadmin/iotivity-examples
@@ -10,6 +11,7 @@ services:
     networks:
       - demonet
 
+  # New app built with iotivity-builder
   speakerserver:
     container_name: speaker_server
     image: ocfadmin/iotivity-examples
@@ -18,6 +20,7 @@ services:
     entrypoint: /iotivity-apps/speaker_server/speaker_server
     networks:
       - demonet
+    # External volume assumed to have the binary; mounted into the working directory
     volumes:
       - speaker_server:/iotivity-apps/speaker_server
 

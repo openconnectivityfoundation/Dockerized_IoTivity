@@ -4,7 +4,7 @@ MAKE_TARGET=iotivity-app/speaker_server
 DEV_IMAGE=ocfadmin/iotivity-builder
 ENV_ARGS=
 
-# Allows us to specify multiple build environment variables for IoTivity-Lite, such as DEBUG=1
+# Allows us to specify multiple build environment variables for IoTivity-Lite, such as "DEBUG=1 IPV4=1"
 ifdef ENV_ARGS
 	docker_envs := $(foreach arg, $(ENV_ARGS), $(addprefix --env ,$(arg)))
 endif

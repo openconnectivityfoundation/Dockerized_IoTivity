@@ -3,6 +3,7 @@ EXAMPLE_IMAGE=ocfadmin/iotivity-examples
 BUILD_IMAGE=ocfadmin/iotivity-builder
 TAG=latest
 BINARIES=simpleserver simpleclient onboarding_tool
+IOTIVITY_BUILD_ARGS=
 
 .PHONY: all examples dev cleaniotivity cleanimage cleanall
 all: examples dev
@@ -19,7 +20,7 @@ iotivity-lite/.git:
 
 $(BINARIES): iotivity-lite/.git
 	cd iotivity-lite/port/linux && \
-		make $@
+		make $(IOTIVITY_BUILD_ARGS) $@
 
 cleaniotivity:
 	cd iotivity-lite/port/linux && \

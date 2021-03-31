@@ -75,12 +75,13 @@ not account for images that do not have the default name:tag of
 Note that different features in IoTivity-Lite can be enabled or disabled with
 [variables](https://iotivity.org/documentation/building-iotivity-linux)
 specified during the build process. These variables can be set during the build
-of the container images defined here. For example, to include IPv4 support in
-the image, one could use the following `make` command:
+of the container images defined here, either as environment variables for the
+`make` command, or direct `make` arguments. For example, to include IPv4 support
+and `DEBUG` logging in the image, one could use the following `make` command:
 
 ```bash
-$ make cleanall
-$ IPV4=1 make
+$ make cleaniotivity
+$ make IOTIVITY_BUILD_ARGS="IPV4=1 DEBUG=1"
 ```
 
 The version of IoTivity lite that is used can also be specified using the

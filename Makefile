@@ -12,7 +12,10 @@ examples: examples/Dockerfile $(BINARIES)
 	docker build -t $(EXAMPLE_IMAGE):$(TAG) -f $< .
 
 dev: build_environment/Dockerfile build_environment/build.sh
-	docker build --build-arg IOTIVITY_TAG=$(IOTIVITY_VERSION) -t $(BUILD_IMAGE):$(TAG) build_environment
+	docker build \
+		--build-arg IOTIVITY_TAG=$(IOTIVITY_VERSION) \
+		--build-arg IOTIVITY_BUILD_ARGS="$(IOTIVITY_BUILD_ARGS)" \
+		-t $(BUILD_IMAGE):$(TAG) build_environment
 
 iotivity-lite/.git:
 	git submodule update --init $(@D)

@@ -42,7 +42,7 @@ The Makefile is also configured to allow specifying different IoTivity-Lite
 build environment variables and/or application targets like so:
 
 ```bash
-$ make ENV_ARGS="DEBUG=1 IPV4=1" MAKE_TARGET="cleanall iotivity-app/speaker_server"
+$ make IOTIVITY_BUILD_ARGS="DEBUG=1 IPV4=1" MAKE_TARGET="cleanall iotivity-app/speaker_server"
 ```
 
 ## Running Example (Built with Volume)

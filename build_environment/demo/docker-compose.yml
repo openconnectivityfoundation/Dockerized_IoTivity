@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # OBT for discovery and provisioning
+  obt:
+    container_name: obt
+    image: ocfadmin/iotivity-examples
+    tty: true
+    stdin_open: true
+    entrypoint: /iotivity-apps/onboarding_tool
+    networks:
+      - demonet
+
+  # New app built with iotivity-builder
+  speakerserver:
+    container_name: speaker_server
+    image: ocfadmin/iotivity-examples
+    tty: true
+    stdin_open: true
+    entrypoint: /iotivity-apps/speaker_server/speaker_server
+    networks:
+      - demonet
+    # External volume assumed to have the binary; mounted into the working directory
+    volumes:
+      - speaker_server:/iotivity-apps/speaker_server
+
+networks:
+  demonet:
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.3.0/24
+          gateway: 172.16.3.1
+        - subnet: 2001:db8:3::/64
+          gateway: 2001:db8:3::1
+
+volumes:
+  speaker_server:
+    external: true

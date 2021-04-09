@@ -1,149 +1,63 @@
-# Dockerized IoTivity-Lite Examples
+# Dockerized IoTivity Resources
 
-*Containerized version of the standard simpleclient-simpleserver-onboarding_tool
-demo.*
+*Container-based solutions for both building and running IoTivity-Lite
+applications.*
 
 *Author: Andy Dolan (CableLabs)*
 
 ## Contents
 
-* [Overview](#overview)
-* [Dependencies](#dependencies)
-  * [IoTivity-Lite Environment](#environment-and-iotivity-lite-build)
-  * [Docker](#docker)
-  * [IPv6 Support](#ipv6-support)
-* [Building the Image](#building-the-image)
-  * [Image Structure](#image-structure)
-* [Using the Image](#using-the-image)
-  * [Use of Volumes](#use-of-volumes)
-* [Using Docker-Compose](#using-docker-compose)
+* [Introduction](#introduction)
+* [Examples Overview](#iotivity-lite-examples)
+* [Build Environment Overview](#iotivity-lite-build-environment)
+* [General Building](#general-building)
 
-## Overview
+## Introduction
 
-This repository contains the definitions necessary to build a container image
-that is able to run IoTivity-Lite example applications. Specifically, the image
-is packaged with `simpleclient`, `simpleserver`, and `onboarding_tool`, which
-can be used together to demonstrate how a typical flow of discovery, onboarding,
-provisioning, and normal operation can be done in OCF.
+This repository contains definitions and scripts to build and run
+container-based solutions for IoTivity-Lite demonstrations and build processes.
+These images can be used to run [example applications](/examples) already
+contained in IoTivity-Lite, as well as [build](/build_environment)
+applications from source code without cloning and configuring Lite. Published
+images are available at the `ocfadmin` organization account on [Docker Hub](https://hub.docker.com/u/ocfadmin).
 
-This project necessarily relies on [IoTivity-Lite](https://gitlab.iotivity.org/iotivity/iotivity-lite)
-and is marked as a submodule.
+**These images are considered to be prototypes,** and are still under
+development.
 
-## Dependencies
+## IoTivity-Lite Examples
 
-### Environment and IoTivity-Lite Build
+The [examples](/examples) directory contains a `Dockerfile` that defines an
+image containing IoTivity-Lite binaries that can be run as instantiated
+containers to demonstrate the general use and interactions of OCF Devices.
 
-This project first builds IoTivity Apps natively and assumes a Debian Linux
-based distribution (e.g., Ubuntu or vanilla Debian). See the Linux instructions
-for building IoTivity-Lite [here](https://iotivity.org/documentation/building-iotivity-linux).
-The development requirements are effectively the `build-essential` package on
-Debian-based systems.
+See the examples [README](/examples/README.md) for more information.
 
-### Docker
+## IoTivity-Lite Build Environment
 
-Docker is assumed to be installed as the container image build tool.
+The [build\_environment](/build_environment) directory contains a
+definition of a container that can be used to compile IoTivity-Lite applications
+from source, as well as a [demonstration](/build_environment/demo) of how
+to do so with an example source file.
 
-### IPv6 Support
+See the build environment [README](/build_environment/README.md) for more
+information.
 
-Additionally, the use of IPv6 is assumed in the default build, and IPv6 support
-must be enabled for IoTivity example container instances to communicate with
-each other. [This guide](https://docs.docker.com/config/daemon/ipv6/) details
-how to enable IPv6 support in the Docker daemon. **Note** that Docker IPv6
-support is only available for Linux hosts.
+## General Building
 
-Alternatively, you may specify `IPV4=1` when building to enable IPv4 support in
-the IoTivity build (see below).
+This repository has one primary [Makefile](/Makefile) that can be used to build
+the images. This file is intended to be used from the root directory. A Debian
+Linux environment is assumed, and Docker is assumed to be installed. There are
+additional requirements to build the examples image that can be found in the
+examples [README](/examples/README.md#dependencies).
 
-## Building the Image
+To make all images, a simple `make` can be used. Individual images can be made
+with their corresponding make recipes (e.g. `make examples` or `make dev`).
 
-The [`Makefile`](./Makefile) is configured to first compile the IoTivity-Lite
-binaries, then build the image based on the [`Dockerfile`](./examples/Dockerfile).
+## General Use
 
-The default image and tag that is built is `ocfadmin/iotivity-examples:latest`.
-These defaults can be overridden by specifying the variables within the `make`
-command, as follows:
+To run a simple demo of the `iotivity-examples` image, simply use a
+`docker-compose up -d` in the main directory. See further instructions in the
+examples [README](/examples/README.md#using-docker-compose).
 
-```
-$ make IMAGE=demo/iotivity-examples TAG=foo
-```
-
-In this case, it is important to note that the default `cleanimage` routine will
-not account for images that do not have the default name:tag of
-`ocfadmin/iotivity-examples:latest`.
-
-Note that different features in IoTivity-Lite can be enabled or disabled with
-[variables](https://iotivity.org/documentation/building-iotivity-linux)
-specified during the build process. These variables can be set during the build
-of the container images defined here. For example, to include IPv4 support in
-the image, one could use the following `make` command:
-
-```
-$ make cleanall
-$ IPV4=1 make
-```
-
-### Image Structure
-
-The final image has a file structure containing the following elements
-(summarized):
-
-* `/creds`: Contains the various `*_creds` directories for the individual apps.
-* `/iotivity-apps`: Contains the actual binaries for each application, as well
-  as symlinks for the corresponding `*_creds` directories, IE:
-
-```
-$ ls -ld /iotivity-apps/simpleserver_creds
-/iotivity-apps/simpleserver_creds -> /creds/simpleserver_creds
-```
-
-These credential files are referenced by a symlink for cases where a
-volume-based solution for the persistent storage of `/creds` is desired.
-
-## Using the Image
-
-Once built, the image can be instantiated to run any of the three applications.
-To get a basic demo, the following commands could be used:
-
-```
-# Run in separate terminals...
-$ docker run -it --name obt --entrypoint /iotivity-apps/onboarding_tool ocfadmin/iotivity-examples
-$ docker run -it --name simpleserver --entrypoint /iotivity-apps/simpleserver ocfadmin/iotivity-examples
-$ docker run -it --name simpleclient --entrypoint /iotivity-apps/simpleclient ocfadmin/iotivity-examples
-```
-
-If an instance needs to be restarted (e.g., after onboarding and provisioning
-the client and server, the containers can be exited with ctrl-c and restarted
-with the following:
-
-```
-$ docker start -ai <name of container>
-```
-
-### Use of Volume(s)
-
-Note that in this simple scenario, the `/creds` directory and the corresponding
-security materials that the IoTivity applications use to function only persist
-with the container, meaning that once the container is destroyed (e.g., `docker
-rm <container>`), the credentials no longer persist.
-
-For the credentials to persist across different instances, the use of a
-[volume](https://docs.docker.com/storage/volumes/) may be appropriate. To do so,
-you may specify the `--mount` flag when executing the containerized examples.
-
-## Using `docker-compose`
-
-If you have `docker-compose` installed, you can also use it to quickly bootstrap
-the example application containers with a simple `docker-compose up -d`.
-**Note** that this creates a network with IPv6 specified, but that IPv6 is not
-officially supported in v3 compose files (this seems to be working, however).
-
-Once the containers are up, it is helpful to use `docker-compose logs -f
-simpleclient simpleserver` in one terminal and `docker attach obt` in another to
-perform onboarding and observe results. However, because `simpleclient` tries to
-discover `simpleserver` immediately when it runs, it is helpful to restart these
-containers individually after provisioning, i.e.
-
-```
-$ docker restart simpleserver
-$ docker restart simpleclient
-```
+See the build environment demo [README](/build_environment/demo/README.md) for
+an example of building IoTivity apps with the `iotivity-builder` image.

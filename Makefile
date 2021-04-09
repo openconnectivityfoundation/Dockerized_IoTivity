@@ -3,7 +3,7 @@ EXAMPLE_IMAGE=ocfadmin/iotivity-examples
 BUILD_IMAGE=ocfadmin/iotivity-builder
 TAG=latest
 BINARIES=simpleserver simpleclient onboarding_tool
-IOTIVITY_BUILD_ARGS=
+IOTIVITY_BUILD_ARGS="IPV4=1"
 
 .PHONY: all examples dev cleaniotivity cleanimage cleanall
 all: examples dev

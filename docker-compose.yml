@@ -29,6 +29,7 @@ services:
       - ocfnet
 
 # Note that IPv6 is not officially supported in compose file v3....
+# IPv6 support must be enabled in /etc/docker/daemon.json
 networks:
   ocfnet:
     enable_ipv6: true

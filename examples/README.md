@@ -51,8 +51,8 @@ each other. [This guide](https://docs.docker.com/config/daemon/ipv6/) details
 how to enable IPv6 support in the Docker daemon. **Note** that Docker IPv6
 support is only available for Linux hosts.
 
-Alternatively, you may specify `IPV4=1` when building to enable IPv4 support in
-the IoTivity build (see below).
+IPv4 support is now included by default in the image as well (e.g., the `IPV4=1`
+build option [is used](https://github.com/openconnectivityfoundation/Dockerized_IoTivity/blob/96fae84eebe36a87a6f52b8ee53f3323e8c44704/Makefile#L6)).
 
 ## Building the Image
 

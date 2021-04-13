@@ -10,5 +10,8 @@ RUN git clone https://github.com/openconnectivityfoundation/DeviceBuilder.git &&
 FROM python:3.8-slim
 COPY --from=builder /ocf_tooling /ocf_tooling
 WORKDIR /ocf_tooling/DeviceBuilder
-RUN pip3 install -U -r requirements.txt
-ENTRYPOINT ["/bin/bash"]
+RUN pip3 install -U -r requirements.txt && mkdir /devbuilder && \
+  ln -s /devbuilder /ocf_tooling/DeviceBuilder/mounted
+VOLUME /devbuilder
+COPY run.sh /ocf_tooling/DeviceBuilder
+ENTRYPOINT ["/bin/sh", "./run.sh"]

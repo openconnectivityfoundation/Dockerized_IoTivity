@@ -42,6 +42,12 @@ to do so with an example source file.
 See the build environment [README](/build_environment/README.md) for more
 information.
 
+## DeviceBuilder Image
+
+The [DeviceBuilder](/DeviceBuilder) directory contains a definition of a
+containerized OCF [DeviceBuilder](https://github.com/openconnectivityfoundation/DeviceBuilder)
+which can be used to generate IoTivity-Lite source files from input model files.
+
 ## General Building
 
 This repository has one primary [Makefile](/Makefile) that can be used to build

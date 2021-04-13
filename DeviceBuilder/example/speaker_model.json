@@ -1,0 +1,7 @@
+[
+  {
+    "path": "/speaker",
+    "rt": [ "oic.r.switch.binary", "oic.r.audio" ],
+    "if": [ "oic.if.a", "oic.if.baseline" ]
+  }
+]

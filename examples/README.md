@@ -26,7 +26,7 @@ is packaged with `simpleclient`, `simpleserver`, and `onboarding_tool`, which
 can be used together to demonstrate how a typical flow of discovery, onboarding,
 provisioning, and normal operation can be done in OCF.
 
-This project necessarily relies on [IoTivity-Lite](https://gitlab.iotivity.org/iotivity/iotivity-lite)
+This project necessarily relies on [IoTivity-Lite](https://github.com/iotivity/iotivity-lite)
 and is marked as a submodule in the root directory.
 
 ## Dependencies

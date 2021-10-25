@@ -17,7 +17,7 @@ services:
     image: ocfadmin/iotivity-examples
     tty: true
     stdin_open: true
-    entrypoint: /iotivity-apps/speaker_server/speaker_server
+    command: speaker_server
     networks:
       - demonet
     # External volume assumed to have the binary; mounted into the working directory

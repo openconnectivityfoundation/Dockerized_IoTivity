@@ -9,7 +9,7 @@ IOTIVITY_BUILD_ARGS="IPV4=1"
 .PHONY: all examples dev devicebuilder cleaniotivity cleanimage cleanall
 all: examples dev devicebuilder
 
-examples: examples/Dockerfile $(BINARIES)
+examples: examples/Dockerfile $(BINARIES) examples/run.sh
 	docker build -t $(EXAMPLE_IMAGE):$(TAG) -f $< .
 
 dev: build_environment/Dockerfile build_environment/build.sh

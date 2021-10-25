@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-  echo "Must specify which example to run! Options are:\nsimpleserver\nsimpleclient\nonboarding_tool"
+  echo "Must specify which example to run! Built-in (default) options are:\nsimpleserver\nsimpleclient\nonboarding_tool"
 }
 
 if [ $# -lt 1 ]
@@ -10,12 +10,14 @@ then
   exit 1
 fi
 
-if [ "$1" != "simpleserver" -a "$1" != "simpleclient" -a "$1" != "onboarding_tool" ]
+EXECUTABLE="$(find -type f -executable -name $1)"
+
+if [ -z "$EXECUTABLE" ]
 then
-  echo "Unknown executable: $1"
+  echo "Failed to find executable: $1"
   usage
   exit 1
 fi
 
-echo "Running $1"
-exec "./$1"
+echo "Running $EXECUTABLE"
+exec "$EXECUTABLE"

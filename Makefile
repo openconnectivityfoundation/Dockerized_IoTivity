@@ -1,4 +1,4 @@
-IOTIVITY_VERSION=2.2.0
+IOTIVITY_VERSION=2.2.4.1
 EXAMPLE_IMAGE=ocfadmin/iotivity-examples
 BUILD_IMAGE=ocfadmin/iotivity-builder
 DEVICEBUILDER_IMAGE=ocfadmin/devicebuilder

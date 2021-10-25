@@ -1,4 +1,4 @@
 [submodule "iotivity-lite"]
 	path = iotivity-lite
-	url = https://gitlab.iotivity.org/iotivity/iotivity-lite.git
+	url = https://github.com/iotivity/iotivity-lite.git
   ignore = dirty

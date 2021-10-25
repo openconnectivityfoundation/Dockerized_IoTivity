@@ -17,4 +17,3 @@ USER ocf
 # Current IoTivity-Lite examples don't properly handle SIGTERM when running as PID 1
 # tini is an init wrapper to handle this purpose
 ENTRYPOINT ["tini", "-g", "--", "/iotivity-apps/run.sh"]
-CMD ["simpleserver"]

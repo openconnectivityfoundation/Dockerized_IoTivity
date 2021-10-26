@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Copyright 2021 Open Connectivity Foundation
 #
@@ -14,14 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [ -z "$MAKEFILE" ]; then
-  MAKEFILE=iotivity-app.mk
-fi
+usage() {
+  echo "Must specify which example to run! Built-in (default) options are:\nsimpleserver\nsimpleclient\nonboarding_tool"
+}
 
-if [ -z "$*" ]; then
-  echo "Specify a build target or \"all\" to build all"
+if [ $# -lt 1 ]
+then
+  usage
   exit 1
 fi
 
-ln -s iotivity-app/iotivity-app.mk $MAKEFILE
-make -f iotivity-app.mk $*
+EXECUTABLE="$(find -type f -executable -name $1)"
+
+if [ -z "$EXECUTABLE" ]
+then
+  echo "Failed to find executable: $1"
+  usage
+  exit 1
+fi
+
+echo "Running $EXECUTABLE"
+exec "$EXECUTABLE"

@@ -9,7 +9,7 @@ IOTIVITY_BUILD_ARGS=
 # Build in a volume, which can be used in a runner image (see docker-compose.yml)
 # Source code is copied into the volume
 volbuild: volcreate iotivity-app/speaker_server.c iotivity-app/iotivity-app.mk
-	docker create --rm --name iotivity-dev $(docker_envs) -v $(VOLUME):/iotivity-app $(DEV_IMAGE) "$(IOTIVITY_BUILD_ARGS)" $(MAKE_TARGET)
+	docker create --rm --name iotivity-dev -v $(VOLUME):/iotivity-app $(DEV_IMAGE) "$(IOTIVITY_BUILD_ARGS)" $(MAKE_TARGET)
 	cd iotivity-app && \
 		docker cp . iotivity-dev:/iotivity-app
 	docker start -a iotivity-dev
